@@ -18,28 +18,72 @@ On the door is a handwritten sign.\n`;
   console.log('Now write your code to make this work!');
   process.exit();
 }
+//! Turn this into bite size chunks and just put in the time
 
+//todo SNOWMAN = MULTIPLE SNOW BALLS
+
+//!Don't worry about simplification or complexity (minimal viable product)
+
+//?   Tu l'as!!! Optimisme est le premier regle
+
+//maybe hand draw a wire frame to help conceptualize everything
 // I need a state for all the rooms to be in
-// each extending into an inventory, a description, and a connection
+//each class should be a name of an item in the state to do the following:
+//into an inventory, a description, and a connection
 //a player state, with an updatable array and a status 
-//(whether that be health, hunger, or insanity mechanic idrc)
+//status= location?
 //create a read function
 //create a take function
 //create a drop function
+//create a keypad function and a class to go with
 
-let rooms = {
+let Rooms = {
   firstRoom:["secondRoom", "fourthRoom"],
-  secondRoom:["firstRoom","thirdRoom"],
-  thirdRoom:["secondRoom"],
-  fourthRoom:["firstRoom"]
+  secondRoom:["firstRoom","thirdRoom","fifthRoom"],
+  thirdRoom:["secondRoom","sixthRoom"],
+  fourthRoom:["firstRoom", "fifthRoom"],
+  fifthRoom:["secondRoom", "fourthRoom"],
+  sixthRoom:["thirdRoom"],
+  escapeHatch:["sixthRoom"]
 }
 let currentRoom = "firstRoom";
 function roomChanger(newRoom){
-  let validTransition= rooms[currentRoom]
+  let validTransition= Rooms[currentRoom]
   if (validTransition.includes(newRoom)){
     currentRoom = newRoom
-  } else {
-    console.log("BLargh")
+    console.log(`You have entered ${currentRoom}`)
   }
 }
-roomChanger("thirdRoom")
+
+class takeableItems {
+  constructor(isTakeable,isInRoom,){
+    this.isTakeable=isTakeable
+    this.isInRoom=isInRoom
+  }
+}
+
+let charInventory = [];
+let playerLocation = currentRoom;
+let globalItemArray = ["Knife"]
+
+function collectItem(item){
+  if(globalItemArray.includes(item)){
+    if(item.isTakeable && item.isInRoom){
+      charInventory.push()
+      return `You have taken the ${item}`
+    } else if (item.isTakeable && !item.isInRoom){
+      return `${item} is not in this room`
+    } else if (item.isInRoom && !item.isTakeable){
+      return `${item} is not able to be taken`
+    } else {
+      return `${item} does not exist `
+    }
+  } else {
+    return `${item} does not exist `
+  }
+}
+
+function displayInventory(){
+  console.log(charInventory)
+}
+roomChanger("secondRoom")
