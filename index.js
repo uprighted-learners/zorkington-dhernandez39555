@@ -13,8 +13,33 @@ async function start() {
   const welcomeMessage = `182 Main St.
 You are standing on Main Street between Church and South Winooski.
 There is a door here. A keypad sits on the handle.
-On the door is a handwritten sign.`;
+On the door is a handwritten sign.\n`;
   let answer = await ask(welcomeMessage);
   console.log('Now write your code to make this work!');
   process.exit();
 }
+
+// I need a state for all the rooms to be in
+// each extending into an inventory, a description, and a connection
+//a player state, with an updatable array and a status 
+//(whether that be health, hunger, or insanity mechanic idrc)
+//create a read function
+//create a take function
+//create a drop function
+
+let rooms = {
+  firstRoom:["secondRoom", "fourthRoom"],
+  secondRoom:["firstRoom","thirdRoom"],
+  thirdRoom:["secondRoom"],
+  fourthRoom:["firstRoom"]
+}
+let currentRoom = "firstRoom";
+function roomChanger(newRoom){
+  let validTransition= rooms[currentRoom]
+  if (validTransition.includes(newRoom)){
+    currentRoom = newRoom
+  } else {
+    console.log("BLargh")
+  }
+}
+roomChanger("thirdRoom")
